@@ -23,6 +23,9 @@ Thumbs.db
 *.sqlite
 *.db
 *.csv
+!artifacts/
+!artifacts/*.csv
+!artifacts/README.md
 
 # Logs
 project.log

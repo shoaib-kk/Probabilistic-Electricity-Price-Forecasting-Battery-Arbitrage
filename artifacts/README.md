@@ -7,6 +7,11 @@ Required files:
 - `conformal_forecast.csv`
 - `final_metrics.csv`
 
+Optional walk-forward validation outputs:
+- `wfv_fold_summary.csv`
+- `wfv_actions.csv`
+- `wfv_forecast_diagnostics.csv`
+
 Generate/update these files with:
 
 ```powershell
@@ -17,6 +22,12 @@ Optional flags:
 
 ```powershell
 python artifact_loader.py --horizons 30,60 --fee-rate 0.01 --target-coverage 0.90
+```
+
+Walk-forward generation:
+
+```powershell
+python artifact_loader.py --walk-forward --horizons 60,120 --wfv-train-days 180 --wfv-calibration-days 30 --wfv-test-days 14 --wfv-step-days 14
 ```
 
 Notes:

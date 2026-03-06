@@ -16,6 +16,7 @@ from arbitrage_sim import (
     run_arbitrage_simulation,
     series_mwh_to_kwh,
 )
+from walk_forward import run_walk_forward_validation, write_walk_forward_artifacts
 
 
 ROOT_DIR = pathlib.Path(__file__).resolve().parent
@@ -188,6 +189,11 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--min-switch-delta-aud-per-kwh", type=float, default=0.01)
     parser.add_argument("--horizon-discount-minutes", type=float, default=90.0)
     parser.add_argument("--soc-buffer", type=float, default=0.05)
+    parser.add_argument("--walk-forward", action="store_true")
+    parser.add_argument("--wfv-train-days", type=int, default=180)
+    parser.add_argument("--wfv-calibration-days", type=int, default=30)
+    parser.add_argument("--wfv-test-days", type=int, default=14)
+    parser.add_argument("--wfv-step-days", type=int, default=14)
     return parser
 
 
@@ -195,23 +201,62 @@ def main() -> None:
     parser = build_arg_parser()
     args = parser.parse_args()
     horizons_minutes = parse_horizons(args.horizons)
-    build_artifacts(
-        artifacts_dir=args.artifacts_dir,
-        train_path=args.train_path,
-        test_path=args.test_path,
-        horizons_minutes=horizons_minutes,
-        fee_rate=args.fee_rate,
-        degradation_cost_per_kwh=args.degradation_cost_per_kwh,
-        target_coverage=args.target_coverage,
-        edge_k=args.edge_k,
-        edge_buffer_aud_per_kwh=args.edge_buffer_aud_per_kwh,
-        min_margin_aud_per_kwh=args.min_margin_aud_per_kwh,
-        min_power_frac=args.min_power_frac,
-        min_hold_steps=args.min_hold_steps,
-        min_switch_delta_aud_per_kwh=args.min_switch_delta_aud_per_kwh,
-        horizon_discount_minutes=args.horizon_discount_minutes,
-        soc_buffer=args.soc_buffer,
-    )
+    if args.walk_forward:
+        policy_kwargs = {
+            "min_signal_charge_aud_per_kwh": 0.0,
+            "min_signal_discharge_aud_per_kwh": 0.0,
+            "power_kw": None,
+            "soc_buffer": args.soc_buffer,
+            "horizon_discount_minutes": args.horizon_discount_minutes,
+            "edge_k": args.edge_k,
+            "edge_buffer_aud_per_kwh": args.edge_buffer_aud_per_kwh,
+            "min_margin_aud_per_kwh": args.min_margin_aud_per_kwh,
+            "min_power_frac": args.min_power_frac,
+            "min_hold_steps": args.min_hold_steps,
+            "min_switch_delta_aud_per_kwh": args.min_switch_delta_aud_per_kwh,
+            "collect_diagnostics": False,
+        }
+        fold_summary, actions, forecast_diag = run_walk_forward_validation(
+            train_path=args.train_path,
+            test_path=args.test_path,
+            horizons_minutes=horizons_minutes,
+            train_days=args.wfv_train_days,
+            calibration_days=args.wfv_calibration_days,
+            test_days=args.wfv_test_days,
+            step_days=args.wfv_step_days,
+            target_coverage=args.target_coverage,
+            fee_rate=args.fee_rate,
+            degradation_cost_per_kwh=args.degradation_cost_per_kwh,
+            policy_kwargs=policy_kwargs,
+        )
+        write_walk_forward_artifacts(
+            args.artifacts_dir,
+            fold_summary=fold_summary,
+            actions=actions,
+            forecast_diag=forecast_diag,
+        )
+        print(f"Wrote walk-forward artifacts to: {args.artifacts_dir}")
+        print(f"- wfv_fold_summary.csv ({len(fold_summary)} rows)")
+        print(f"- wfv_actions.csv ({len(actions)} rows)")
+        print(f"- wfv_forecast_diagnostics.csv ({len(forecast_diag)} rows)")
+    else:
+        build_artifacts(
+            artifacts_dir=args.artifacts_dir,
+            train_path=args.train_path,
+            test_path=args.test_path,
+            horizons_minutes=horizons_minutes,
+            fee_rate=args.fee_rate,
+            degradation_cost_per_kwh=args.degradation_cost_per_kwh,
+            target_coverage=args.target_coverage,
+            edge_k=args.edge_k,
+            edge_buffer_aud_per_kwh=args.edge_buffer_aud_per_kwh,
+            min_margin_aud_per_kwh=args.min_margin_aud_per_kwh,
+            min_power_frac=args.min_power_frac,
+            min_hold_steps=args.min_hold_steps,
+            min_switch_delta_aud_per_kwh=args.min_switch_delta_aud_per_kwh,
+            horizon_discount_minutes=args.horizon_discount_minutes,
+            soc_buffer=args.soc_buffer,
+        )
 
 
 if __name__ == "__main__":

@@ -50,6 +50,7 @@ Notes:
 3) Explore: run analysis/visualisation scripts to inspect seasonality and spikes.
 4) Forecast and backtest: train quantile models, then run arbitrage simulation to compare baseline vs. conformal policies.
 5) Build Streamlit artifacts: `python artifact_loader.py` (writes CSVs under `./artifacts` for cloud deployment).
+6) Walk-forward validation artifacts (optional): `python artifact_loader.py --walk-forward --horizons 60,120 --wfv-train-days 180 --wfv-calibration-days 30 --wfv-test-days 14 --wfv-step-days 14`.
 
 ---
 
