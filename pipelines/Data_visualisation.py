@@ -1,5 +1,12 @@
 from pathlib import Path
+import os
 import pandas as pd
+import matplotlib
+
+# Use a non-interactive backend when running in headless environments.
+if os.name != "nt" and not os.environ.get("DISPLAY"):
+    matplotlib.use("Agg")
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 from statsmodels.tsa.seasonal import seasonal_decompose

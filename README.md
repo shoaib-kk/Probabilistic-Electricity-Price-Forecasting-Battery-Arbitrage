@@ -4,6 +4,11 @@ End-to-end pipeline for battery arbitrage on Australian NEM price data: collect 
 
 ---
 
+## Live App
+Streamlit dashboard: https://probabilistic-electricity-price-forecasting-battery-arbitrage.streamlit.app/
+
+---
+
 ## Highlights
 - Automated AEMO data ingestion with integrity checks and chunked merges
 - Leakage-safe cleaning, gap handling, and feature engineering for 5-minute data
@@ -46,11 +51,11 @@ Notes:
 
 ## Quickstart
 1) Install: `pip install -r requirements.txt`
-2) Collect and clean: run the data scripts (or `Main.py`) to produce `PRICE_AND_DEMAND_FULL_VIC1.csv` and cleaned train/test CSVs.
+2) Collect and clean: run the data scripts (or `python -m pipelines.Main`) to produce `PRICE_AND_DEMAND_FULL_VIC1.csv` and cleaned train/test CSVs.
 3) Explore: run analysis/visualisation scripts to inspect seasonality and spikes.
 4) Forecast and backtest: train quantile models, then run arbitrage simulation to compare baseline vs. conformal policies.
-5) Build Streamlit artifacts: `python artifact_loader.py` (writes CSVs under `./artifacts` for cloud deployment).
-6) Walk-forward validation artifacts (optional): `python artifact_loader.py --walk-forward --horizons 60,120 --wfv-train-days 180 --wfv-calibration-days 30 --wfv-test-days 14 --wfv-step-days 14`.
+5) Build Streamlit artifacts: `python -m pipelines.artifact_loader` (writes CSVs under `./artifacts` for cloud deployment).
+6) Walk-forward validation artifacts (optional): `python -m pipelines.artifact_loader --walk-forward --horizons 60,120 --wfv-train-days 180 --wfv-calibration-days 30 --wfv-test-days 14 --wfv-step-days 14`.
 
 ---
 

@@ -15,19 +15,19 @@ Optional walk-forward validation outputs:
 Generate/update these files with:
 
 ```powershell
-python artifact_loader.py
+python -m pipelines.artifact_loader
 ```
 
 Optional flags:
 
 ```powershell
-python artifact_loader.py --horizons 30,60 --fee-rate 0.01 --target-coverage 0.90
+python -m pipelines.artifact_loader --horizons 30,60 --fee-rate 0.01 --target-coverage 0.90
 ```
 
 Walk-forward generation:
 
 ```powershell
-python artifact_loader.py --walk-forward --horizons 60,120 --wfv-train-days 180 --wfv-calibration-days 30 --wfv-test-days 14 --wfv-step-days 14
+python -m pipelines.artifact_loader --walk-forward --horizons 60,120 --wfv-train-days 180 --wfv-calibration-days 30 --wfv-test-days 14 --wfv-step-days 14
 ```
 
 Notes:

@@ -6,8 +6,8 @@ from dataclasses import asdict
 
 import pandas as pd
 
-import time_utils
-from arbitrage_sim import (
+import src.time_utils as time_utils
+from src.arbitrage_sim import (
     baseline_threshold_policy,
     build_multi_horizon_conformal_forecasts,
     build_price_series_mwh,
@@ -16,10 +16,10 @@ from arbitrage_sim import (
     run_arbitrage_simulation,
     series_mwh_to_kwh,
 )
-from walk_forward import run_walk_forward_validation, write_walk_forward_artifacts
+from src.walk_forward import run_walk_forward_validation, write_walk_forward_artifacts
 
 
-ROOT_DIR = pathlib.Path(__file__).resolve().parent
+ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 DEFAULT_ARTIFACTS_DIR = ROOT_DIR / "artifacts"
 DEFAULT_TRAIN_PATH = ROOT_DIR / "CLEANED_PRICE_AND_DEMAND_VIC1_TRAIN.csv"
 DEFAULT_TEST_PATH = ROOT_DIR / "CLEANED_PRICE_AND_DEMAND_VIC1_TEST.csv"

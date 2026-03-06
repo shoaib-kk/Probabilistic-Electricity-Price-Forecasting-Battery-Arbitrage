@@ -6,15 +6,15 @@ from typing import Callable
 
 import numpy as np
 import pandas as pd
-from Battery_model import Battery
-from Quantile_regression import (
+from src.Battery_model import Battery
+from src.Quantile_regression import (
     manage_train_test_split,
 
     train_quantile_model,
 )
 from sklearn.metrics import mean_pinball_loss
-import Metrics_utils
-from logging_utils import setup_logging
+import src.Metrics_utils as Metrics_utils
+from src.logging_utils import setup_logging
 import logging
 
 setup_logging()

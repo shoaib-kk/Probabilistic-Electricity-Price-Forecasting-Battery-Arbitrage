@@ -6,8 +6,8 @@ from statsmodels.tools.sm_exceptions import ConvergenceWarning
 from statsmodels.tsa.stattools import adfuller
 import time
 import warnings
-import time_utils
-import Metrics_utils
+import src.time_utils as time_utils
+import src.Metrics_utils as Metrics_utils
 
 
 def fit_arima(series: pd.Series, order: tuple, max_iterations: int = 50):

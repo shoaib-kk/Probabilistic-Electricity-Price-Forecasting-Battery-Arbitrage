@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import time_utils
+import src.time_utils as time_utils
 
 def shorten_time_increment(df, time_freq: int = 60) -> pd.DataFrame:
 
