@@ -479,22 +479,45 @@ def render_forecast_viewer(forecast_df: pd.DataFrame | None):
 
 
 def main():
-    summary_df = load_csv(BACKTEST_FILE)
-    actions_df = prepare_actions_df(load_csv(ACTIONS_FILE))
-    cumulative_df = prepare_cumulative_df(load_csv(CUM_PROFIT_FILE), actions_df)
-    forecast_df = load_csv(FORECAST_FILE)
+    from app import live_dashboard
 
-    page = st.sidebar.selectbox("Page", ["Overview", "Strategy Comparison", "Forecast Viewer"])
+    page = st.sidebar.selectbox(
+        "Page",
+        [
+            "Live Paper Trading",
+            "RL Backtest",
+            "Overview (legacy)",
+            "Strategy Comparison (legacy)",
+            "Forecast Viewer (legacy)",
+        ],
+    )
 
+    st.sidebar.warning(
+        "Simulated paper trading — no real money or hardware. "
+        "Real AEMO prices, hypothetical trades."
+    )
     st.sidebar.markdown("### Deployment Notes")
-    st.sidebar.caption("This app is artifact-only for Streamlit Community Cloud. Run model training/backtests offline and upload outputs to `artifacts/`.")
+    st.sidebar.caption(
+        "Live pages read the `live-data` branch published by the scheduled "
+        "GitHub Actions tick (30-min cadence). Legacy pages show the original "
+        "conformal-policy backtest artifacts."
+    )
 
-    if page == "Overview":
+    if page == "Live Paper Trading":
+        live_dashboard.render_live_page()
+    elif page == "RL Backtest":
+        live_dashboard.render_backtest_page()
+    elif page == "Overview (legacy)":
+        summary_df = load_csv(BACKTEST_FILE)
+        actions_df = prepare_actions_df(load_csv(ACTIONS_FILE))
+        cumulative_df = prepare_cumulative_df(load_csv(CUM_PROFIT_FILE), actions_df)
         render_overview(summary_df, cumulative_df)
-    elif page == "Strategy Comparison":
+    elif page == "Strategy Comparison (legacy)":
+        summary_df = load_csv(BACKTEST_FILE)
+        actions_df = prepare_actions_df(load_csv(ACTIONS_FILE))
         render_strategy_comparison(actions_df, summary_df)
     else:
-        render_forecast_viewer(forecast_df)
+        render_forecast_viewer(load_csv(FORECAST_FILE))
 
 
 if __name__ == "__main__":

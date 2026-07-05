@@ -1,0 +1,9 @@
+# Training/backtest dependencies (on top of requirements-live.txt).
+# For a CPU-only torch install:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+-r requirements-live.txt
+stable-baselines3>=2.3
+torch>=2.3
+scipy>=1.11
+matplotlib
+pytest

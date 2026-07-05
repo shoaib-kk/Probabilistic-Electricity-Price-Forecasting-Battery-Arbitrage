@@ -25,7 +25,20 @@ Thumbs.db
 *.csv
 !artifacts/
 !artifacts/*.csv
+!artifacts/**/*.csv
+!models/deployed/*.csv
 !artifacts/README.md
+
+# Bulky rebuildable data (see scripts/build_dataset.py)
+aemo_vic1/
+data/dataset_30min.csv
+data/weather_archive.csv
+PRICE_AND_DEMAND_FULL_VIC1.csv
+CLEANED_PRICE_AND_DEMAND_VIC1_*.csv
+
+# Local-only training outputs (the deployed bundle IS committed)
+models/*
+!models/deployed/
 
 # Logs
 project.log
