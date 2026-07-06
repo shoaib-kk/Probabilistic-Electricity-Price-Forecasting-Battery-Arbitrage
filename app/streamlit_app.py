@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import pathlib
+import sys
 from typing import Iterable
 
 import matplotlib.pyplot as plt
@@ -9,6 +10,11 @@ import pandas as pd
 import streamlit as st
 
 ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
+# Streamlit Cloud runs the entry script from app/, so the repo root is not
+# importable without this (needed for `from app import live_dashboard`).
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
 ARTIFACTS_DIR = ROOT_DIR / "artifacts"
 
 METRICS_FILE = ARTIFACTS_DIR / "final_metrics.csv"
