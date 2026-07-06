@@ -22,7 +22,8 @@ ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 
 LIVE_DATA_URL = os.environ.get(
     "LIVE_DATA_URL",
-    "https://raw.githubusercontent.com/shoaib-kk/electricity-price-solar-analysis/live-data",
+    "https://raw.githubusercontent.com/shoaib-kk/"
+    "Probabilistic-Electricity-Price-Forecasting-Battery-Arbitrage/live-data",
 )
 
 # Fixed entity -> color assignment (validated categorical palette).
