@@ -1,0 +1,89 @@
+{
+  "trained_at_utc": "2026-07-05T13:29:05+00:00",
+  "data_end": "2026-07-04 23:30:00",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "primary_seed": 4,
+  "timesteps": 300000,
+  "thresholds": {
+    "low_mwh": 5.4529999999999985,
+    "high_mwh": 89.7575
+  },
+  "obs_columns": [
+    "soc",
+    "hour_sin",
+    "hour_cos",
+    "dow_sin",
+    "dow_cos",
+    "is_weekend",
+    "nprice_lag_1",
+    "nprice_lag_2",
+    "nprice_lag_3",
+    "nprice_lag_4",
+    "nprice_lag_5",
+    "nprice_lag_6",
+    "nprice_roll_mean_24",
+    "nprice_roll_std_24",
+    "rrp_pct_7d",
+    "n_h1_q05",
+    "n_h1_q50",
+    "n_h1_q95",
+    "n_h2_q05",
+    "n_h2_q50",
+    "n_h2_q95",
+    "ghi_norm",
+    "ghi_fut_norm",
+    "ndemand"
+  ],
+  "val_window": [
+    "2026-06-04 23:30:00",
+    "2026-07-04 23:30:00"
+  ],
+  "val_metrics": {
+    "0": {
+      "total_profit": 3.019480620370372,
+      "sharpe_daily_ann": 0.7597558024908477,
+      "max_drawdown": 9.20134663425926,
+      "equivalent_cycles": 7.68287037037037,
+      "profit_per_cycle": 0.39301465140102465,
+      "n_intervals": 1440
+    },
+    "1": {
+      "total_profit": -4.70350223127572,
+      "sharpe_daily_ann": -1.12500485073704,
+      "max_drawdown": 14.843819533127572,
+      "equivalent_cycles": 8.540385802469137,
+      "profit_per_cycle": -0.5507365053597316,
+      "n_intervals": 1440
+    },
+    "2": {
+      "total_profit": -2.699102710648148,
+      "sharpe_daily_ann": -0.6819429484620213,
+      "max_drawdown": 16.7035588125,
+      "equivalent_cycles": 10.23307098765432,
+      "profit_per_cycle": -0.2637627271328889,
+      "n_intervals": 1440
+    },
+    "3": {
+      "total_profit": 1.857749548611113,
+      "sharpe_daily_ann": 0.48751287210446564,
+      "max_drawdown": 9.358283418981483,
+      "equivalent_cycles": 6.384027777777777,
+      "profit_per_cycle": 0.2909996029587733,
+      "n_intervals": 1440
+    },
+    "4": {
+      "total_profit": -2.447665532407407,
+      "sharpe_daily_ann": -4.230682348577378,
+      "max_drawdown": 1.935053032407407,
+      "equivalent_cycles": 0.27777777777777773,
+      "profit_per_cycle": -8.811595916666667,
+      "n_intervals": 1440
+    }
+  }
+}
