@@ -1,0 +1,29 @@
+{
+  "last_processed": "2026-10-24 21:30:00",
+  "strategies": {
+    "rl_seed0": {
+      "soc": 0.0,
+      "cumulative_profit": 58.52354640276666
+    },
+    "rl_seed1": {
+      "soc": 0.0,
+      "cumulative_profit": 154.411175210805
+    },
+    "rl_seed2": {
+      "soc": 0.0,
+      "cumulative_profit": 142.22645822553966
+    },
+    "rl_seed3": {
+      "soc": 0.0,
+      "cumulative_profit": 119.05989144220577
+    },
+    "rl_seed4": {
+      "soc": 0.0,
+      "cumulative_profit": 121.91590607961125
+    },
+    "threshold": {
+      "soc": 0.0,
+      "cumulative_profit": 143.4607232784916
+    }
+  }
+}
